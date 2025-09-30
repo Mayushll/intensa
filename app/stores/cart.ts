@@ -11,8 +11,9 @@ export const useCartStore = defineStore('cart', () => {
       if (savedCart) {
         try {
           items.value = JSON.parse(savedCart);
-        } catch (e) {
-          console.error('Failed to parse cart from localStorage', e);
+        } catch {
+          // Reset cart if localStorage data is corrupted
+          items.value = [];
         }
       }
       isInitialized.value = true;
